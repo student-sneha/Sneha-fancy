@@ -1,7 +1,7 @@
 import React from "react";
 
 const NewsLetter = () => {
-  const whatsappLink = "https://chat.whatsapp.com/your-community-invite-link"; 
+  const whatsappLink = " https://chat.whatsapp.com/CLpS2ebzI7X8S9islfV0Nm?mode=ac_t"; 
 
   return (
     <div className="bg-gradient-to-br from-pink-50 to-white text-black py-16 px-4 mt-20 rounded-3xl shadow-lg border border-pink-200">

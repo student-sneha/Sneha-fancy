@@ -29,7 +29,7 @@ const Add = ({ token }) => {
     "Lipsticks",
     "Makeup Kits",
     "Bags",
-    "Hair Accessories",
+    "Accessories",
     "Beauty Tools",
     "Nail Paint",
     "Jewelry",

@@ -11,6 +11,7 @@ import Cart from "./pages/Cart";
 import Product from "./pages/Product";
 import Verify from "./pages/Verify";
 
+
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer";
 import SearchBar from "./components/SearchBar";

@@ -5,6 +5,7 @@ import { ShopContext } from "../context/ShopContext";
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(false);
   const {
     setShowSearch,
     getCartCount,
@@ -20,6 +21,8 @@ const Navbar = () => {
     setCartItems({});
     navigate("/login");
   };
+
+  
   return (
     <div className="flex items-center justify-between font-medium relative z-50">
       <Link to={`/`}>
@@ -53,30 +56,57 @@ const Navbar = () => {
 
       <div className="flex items-center gap-6">
         <img
-          onClick={() => setShowSearch(true)}
+          onClick={() => 
+            {setShowSearch(true);
+ navigate("/collection");
+            }}
+           
           src={assets.search_icon}
           className="w-5 cursor-pointer"
         />
-        <div className="group relative">
-          <img
-            onClick={() => (token ? null : navigate(`/login`))}
-            src={assets.profile_icon}
-            alt=""
-            className="w-5 cursor-pointer "
-          />
-
+         <div className="relative group">
+      <img
+  onClick={() => setShowDropdown((prev) => !prev)}
+  src={assets.profile_icon}
+  alt=""
+  className="w-5 cursor-pointer"
+/>
           {/* Dropdown Menu */}
-          {token && (
-            <div className="group-hover:block hidden absolute dropdown-menu right-0 pt-4">
-              <div className="flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded ">
-                <p className="cursor-pointer hover:text-black">My Profile</p>
-                <p onClick={()=> navigate("/orders")} className="cursor-pointer hover:text-black"> Orders</p>
-                <p onClick={logout} className="cursor-pointer hover:text-black">
-                  Logout
-                </p>
-              </div>
-            </div>
-          )}
+         {token && showDropdown && (
+  <div className="absolute right-0 pt-4 z-50">
+    <div className="flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded shadow-md">
+      <p
+        onClick={() => {
+          navigate("/orders");
+          setShowDropdown(false);
+        }}
+        className="cursor-pointer hover:text-black"
+      >
+        My Profile
+      </p>
+      <p
+        onClick={() => {
+          navigate("/orders");
+          setShowDropdown(false);
+        }}
+        className="cursor-pointer hover:text-black"
+      >
+        Orders
+      </p>
+      <p
+        onClick={() => {
+          logout();
+          setShowDropdown(false);
+        }}
+        className="cursor-pointer hover:text-black"
+      >
+        Logout
+      </p>
+    </div>
+  </div>
+)}
+
+
         </div>
 
         <Link to="/cart" className="relative">

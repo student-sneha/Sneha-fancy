@@ -97,13 +97,8 @@ const Collection = () => {
               "Bags",
               "Lipsticks",
               "Makeup Kits",
-              "Skincare",
-              "Perfume",
               "Beauty",
               "Nail Paint",
-              "Innerwear",
-              "Sports Bra"
-
             ].map((type) => (
               <label key={type} className="flex gap-2">
                 <input

@@ -28,15 +28,11 @@ const Add = ({ token }) => {
     "Mangalsutra",
     "Lipsticks",
     "Makeup Kits",
-    "Skincare",
     "Bags",
     "Hair Accessories",
-    "Perfume",
     "Beauty Tools",
     "Nail Paint",
-    "Jewelry Sets",
-    "Sports Bra",   // clothing that needs sizes
-    "Innerwear"     // clothing that needs sizes
+    "Jewelry",
   ];
 
   useEffect(() => {

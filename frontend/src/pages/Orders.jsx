@@ -48,7 +48,14 @@ const Orders = () => {
       </div>
 
       <div>
-        {orderData.map((item, idx) => (
+        {orderData.length === 0 ? (
+   <div className="text-center text-gray-500 py-10 text-lg">
+    <p className="mb-4">You have no orders yet.</p>
+    <a href="/collection" className="shop-now-btn">
+      Shop Now
+     </a>
+  </div>
+  ) : (orderData.map((item, idx) => (
           <div
             key={idx}
             className="py-4 border-t border-b text-gray-700 flex flex-col md:flex-row md:items-center md:justify-between gap-4
@@ -84,10 +91,10 @@ const Orders = () => {
               </button>
             </div>
           </div>
-        ))}
-      </div>
+        ))
+      )}
     </div>
-  );
-};
+  </div>
+)}
 
 export default Orders;

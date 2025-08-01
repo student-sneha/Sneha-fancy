@@ -3,10 +3,15 @@ import userModel from "../models/userModel.js";
 //add products to user cart
 const addToCart = async (req, res) => {
   try {
-    const { userId, itemId, size } = req.body;
+    const userId = req.userId; // use from middleware
+    const { itemId, size } = req.body;
 
     const userData = await userModel.findById(userId);
-    let cartData = await userData.cartData;
+    if (!userData) {
+      return res.json({ success: false, message: "User not found" });
+    }
+
+    let cartData = userData.cartData;
 
     if (cartData[itemId]) {
       if (cartData[itemId][size]) {
@@ -18,14 +23,16 @@ const addToCart = async (req, res) => {
       cartData[itemId] = {};
       cartData[itemId][size] = 1;
     }
+
     await userModel.findByIdAndUpdate(userId, { cartData });
     res.json({ success: true, message: "Product added to cart" });
-  
+
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: "Failed to add product to cart" });
   }
 };
+
 
 // Upadte products to user cart
 const updateCart = async (req, res) => {
@@ -67,13 +74,17 @@ const getUserCart = async (req, res) => {
     const { userId } = req.body;
 
     const userData = await userModel.findById(userId);
-    let cartData = await userData.cartData;
+    if (!userData) {
+      return res.json({ success: false, message: "User not found" });
+    }
 
+    let cartData = userData.cartData || {}; // default to empty object if null
     res.json({ success: true, cartData });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
   }
 };
+
 
 export { addToCart, updateCart, getUserCart };

@@ -21,9 +21,14 @@ const Navbar = () => {
     navigate("/login");
   };
   return (
-    <div className="flex items-center justify-between py-5 font-medium relative z-50">
+    <div className="flex items-center justify-between font-medium relative z-50">
       <Link to={`/`}>
-        <img src={assets.trendy} className="w-30 h-23 bg-transparent" />
+<img 
+  src={assets.sneha} 
+  className="h-25 sm:h-33 object-contain" 
+  alt="Sneha Logo" 
+/>
+
       </Link>
 
       <ul className="hidden sm:flex gap-5 text-sm text-grey-700">
@@ -89,8 +94,8 @@ const Navbar = () => {
 
       {/* Sidebar menu for small screen */}
       <div
-        className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all ${
-          visible ? "w-full" : "w-0"
+        className={`fixed top-0 right-0 h-full bg-white z-[999] overflow-hidden transition-all duration-300 ${
+    visible ? "w-full" : "w-0"
         }`}
       >
         <div className="flex flex-col text-gray-600">

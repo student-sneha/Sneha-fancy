@@ -16,6 +16,56 @@ a.active hr{
 ::-webkit-scrollbar{
   display: none;
 }
+@keyframes animate {
+   0% {
+  transform: scale(0.35);
+
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+.welcome {
+  animation: animate 2s infinite ease-in-out;
+}
+
+@keyframes glow {
+  0% {
+  transform: scale(0.46);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.shop-now-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(to right, #000, #333);
+  color: white;
+  padding: 10px 24px;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  animation: glow 2s infinite ease-in-out;
+}
+
+.shop-now-btn:hover {
+  background: #222;
+  transform: translateY(-2px);
+}
+
+.shop-now-btn span {
+  display: inline-block;
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+
+.shop-now-btn:hover span {
+  transform: translateX(5px);
+}
+
 
 @media (max-width:640px) {
   a.active{

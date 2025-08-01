@@ -1,33 +1,32 @@
 import React from "react";
 
 const NewsLetter = () => {
-  const onSumbitHandler = (event) => {
-    event.preventDefault();
-  };
+  const whatsappLink = "https://chat.whatsapp.com/your-community-invite-link"; 
+
   return (
-    <div className="text-center mt-10">
-      <p className="text-2xl font-medium text-gray-800">
-        Subscribe now & get 20% off
+    <div className="bg-gradient-to-br from-pink-50 to-white text-black py-16 px-4 mt-20 rounded-3xl shadow-lg border border-pink-200">
+      <h2 className="text-3xl sm:text-4xl font-bold text-center tracking-wide text-pink-600">
+        Join the SnehaFancy Circle 💖
+      </h2>
+      <p className="text-gray-600 text-center mt-3 text-sm sm:text-base">
+        Be the first to know about new trends, beauty tips & exclusive drops – all in our WhatsApp Community!
       </p>
-      <p className="text-gray-400 mt-3">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-      </p>
-      <form
-        onSubmit={onSumbitHandler}
-        className="w-full sm:w-1/2 flex items-center gap-3 mx-auto my-6 border pl-3"
-      >
-        <input
-          type="email"
-          placeholder="Enter your email"
-          className="w-full sm:flex-1 outline-none"
-        />
-        <button
-          type="submit"
-          className="bg-black text-white text-xs px-10 py-4 "
+
+      <div className="mt-8 w-full sm:w-2/3 md:w-1/2 mx-auto flex justify-center">
+        <a
+          href={whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-full shadow-md transition-all duration-300 flex items-center gap-2"
         >
-          Subscribe Now
-        </button>
-      </form>
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" className="w-5 h-5" />
+          Join on WhatsApp
+        </a>
+      </div>
+
+      <p className="text-xs text-gray-400 text-center mt-4">
+        Open to all beauty & fashion lovers. Let’s glow together 💅
+      </p>
     </div>
   );
 };

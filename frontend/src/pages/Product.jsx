@@ -103,12 +103,12 @@ const Product = () => {
               </button>
             </div>
           </div>
-         <button
-  onClick={() => addToCart(productData._id, size, quantity)}
-  className="bg-black text-white py-3 px-8 text-sm active:bg-gray-700"
->
-  ADD TO CART
-</button>
+          <button
+            onClick={() => addToCart(productData._id, size, quantity)}
+            className="bg-black text-white py-3 px-8 text-sm active:bg-gray-700"
+          >
+            ADD TO CART
+          </button>
 
           <hr className="mt-8 sm:w-4/5" />
           <div className="text-sm mt-5 text-gray-500 flex flex-col gap-1">
@@ -127,14 +127,19 @@ const Product = () => {
         </div>
         <div className="flex flex-col gap-4 border px-6 py-6 text-sm text-gray-500">
           <p>
-            Tendylo brings you the latest fashion and lifestyle essentials at
-            affordable prices. From trendy outfits to stylish accessories, we
-            offer quality products that help you stay ahead in style.
+            <b>SnehaFancy</b> is your go-to destination for everything glamorous
+            and elegant. From stunning jewelry like bangles, rings, necklaces,
+            and mangalsutras to beauty must-haves including lipsticks, nail
+            paint, and makeup kits — we celebrate the spirit of style in every
+            woman.
           </p>
           <p>
-            Enjoy smooth shopping with fast delivery, secure payments, and great
-            deals. At Tendylo, we make fashion easy, fun, and accessible for
-            everyone. Stay trendy with Tendylo!
+            Every product is handpicked with a focus on quality, style, and
+            tradition. Whether you're looking for everyday accessories or
+            something festive, SnehaFancy offers timeless designs that never go
+            out of fashion.Shop with confidence and enjoy a seamless experience
+            with easy returns, secure checkout, and unmatched variety — only at
+            SnehaFancy.
           </p>
         </div>
       </div>

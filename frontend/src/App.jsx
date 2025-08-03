@@ -20,13 +20,12 @@ import SearchBar from "./components/SearchBar";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ScrollToTop from "./components/SrcollToTop";
-import WelcomePopup from "./components/Welcome";
+
 
 const App = () => {
   return (
     <div className="px-2 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
     <ToastContainer/>
-      <WelcomePopup /> 
      <Navbar />
      <SearchBar />
       <ScrollToTop />

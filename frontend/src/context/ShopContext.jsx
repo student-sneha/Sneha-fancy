@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createContext } from "react";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom"; // make sure both are imported
 import axios from "axios";
 
 export const ShopContext = createContext();
@@ -17,40 +17,46 @@ const ShopContextProvider = (props) => {
   const [showSearch, setShowSearch] = useState(false);
   const [cartItems, setCartItems] = useState({});
   const [token, setToken] = useState("");
+  
+const navigate = useNavigate();
+const location = useLocation();
 
-  const navigate = useNavigate();
+ const addToCart = async (itemId, size, quantity = 1) => {
+  if (!token) {
+    toast.info("Please login first to add items to your cart");
+    setTimeout(() => {
+      navigate("/login", { state: { from: location.pathname } });
+    }, 1500);
+    return;
+  }
 
-  const addToCart = async (itemId, size) => {
-    if (!size) {
-      toast.error("Select Product size");
-      return;
-    }
+  if (!size) {
+    toast.error("Please select a product size");
+    return;
+  }
 
-    let cartData = structuredClone(cartItems);
+  // Clone and update cart
+  let cartData = structuredClone(cartItems);
+  if (cartData[itemId]) {
+    cartData[itemId][size] = (cartData[itemId][size] || 0) + quantity;
+  } else {
+    cartData[itemId] = { [size]: quantity };
+  }
 
-    if (cartData[itemId]) {
-      if (cartData[itemId][size]) {
-        cartData[itemId][size] += 1;
-      } else {
-        cartData[itemId][size] = 1;
-      }
-    } 
-    else {
-      cartData[itemId] = {};
-      cartData[itemId][size] = 1;
-    }
-    setCartItems(cartData);
+  setCartItems(cartData);
 
-    if(token){
-      try {
-        await axios.post(backendUrl + "/api/cart/add", {itemId,size} , {headers:{token}});
-
-      } catch (error) {
-        console.log(error);
-        toast.error(error.message);
-      }
-    }
-  };
+  try {
+    await axios.post(
+      backendUrl + "/api/cart/add",
+      { itemId, size, quantity },
+      { headers: { token } }
+    );
+    toast.success("Item added to cart");
+  } catch (error) {
+    console.log(error);
+    toast.error("Failed to add item. Please try again.");
+  }
+};
 
   const getCartCount = () => {
     let totalCount = 0;

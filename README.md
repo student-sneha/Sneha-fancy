@@ -81,7 +81,7 @@ cd backend
 npm run server
 
 ### Run frontend app
-cd ../frontend
+cd frontend
 npm run dev
 
 ### 📁 Folder Structure

@@ -51,17 +51,16 @@ It features a seamless shopping experience for users and a powerful admin panel 
 
 Both the /frontend and /backend apps require environment variables.
 Sample .env.example files are provided — copy them and rename to .env:
-### `/frontend/.env`
 
-✅ Setup Steps
+##✅ Setup Steps
 
-# For frontend
+### For frontend
 cd frontend/.env.example frontend/.env
 
-# For backend
+### For backend
 cp backend/.env.example backend/.env
 
-🛠️ Getting Started (Local Setup)
+##🛠️ Getting Started (Local Setup)
 ### 1. Clone the repository
 git clone https://github.com/student-sneha/SnehaFancy.git
 cd SnehaFancy
@@ -86,7 +85,7 @@ cd ../frontend
 npm run dev
 
 ### 📁 Folder Structure
-
+```bash
 SnehaFancy/
 │
 ├── backend/                 # Node.js + Express + MongoDB API
@@ -116,7 +115,7 @@ SnehaFancy/
 ├── .gitignore
 ├── README.md
 └── package.json
-
+```
 
 🙋‍♀️ About Me
 

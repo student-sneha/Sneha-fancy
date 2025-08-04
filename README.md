@@ -49,9 +49,9 @@ It features a seamless shopping experience for users and a powerful admin panel 
 
 ## 🔐 Environment Variables
 
-Create a .env file in both /frontend and /backend directories with the following content:
+Create a `.env` file in both `/frontend` and `/backend` directories with the following content:
 
-### /frontend/.env
+### `/frontend/.env`
 ```env
 VITE_BACKEND_URL=http://localhost:4000
 

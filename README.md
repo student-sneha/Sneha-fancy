@@ -55,6 +55,7 @@ Create a `.env` file in both `/frontend` and `/backend` directories with the fol
 VITE_BACKEND_URL=http://localhost:4000
 
 ### `/backend/.env`
+(```env)
 PORT=4000
 MONGO_URL=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
@@ -64,7 +65,6 @@ CLOUDINARY_SECRET_KEY=your_cloudinary_secret_key
 STRIPE_SECRET_KEY=your_stripe_secret_key
 ADMIN_EMAIL=your_admin_email
 ADMIN_PASSWORD=your_admin_password
-
 
 🛠️ Getting Started (Local Setup)
 ### 1. Clone the repository

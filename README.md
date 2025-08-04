@@ -51,10 +51,12 @@ It features a seamless shopping experience for users and a powerful admin panel 
 
 Create a `.env` file in both `/frontend` and `/backend` directories with the following content:
 
-/frontend/.env
+### `/frontend/.env`
+```env```
 VITE_BACKEND_URL=http://localhost:4000
 
-/backend/.env
+### `/backend/.env`
+```env```
 PORT=4000
 MONGO_URL=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret

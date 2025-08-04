@@ -49,10 +49,9 @@ It features a seamless shopping experience for users and a powerful admin panel 
 
 ## 🔐 Environment Variables
 
-###Create a `.env` file in both `/frontend` and `/backend` directories with the following content:
+Create a `.env` file in both `/frontend` and `/backend` directories with the following content:
 
 ### `/frontend/.env`
-(```env)
 VITE_BACKEND_URL=http://localhost:4000
 
 ### `/backend/.env`
@@ -76,15 +75,14 @@ cd SnehaFancy
 cd frontend
 npm install
 
-#### 3. Install Backend Dependencies
+### 3. Install Backend Dependencies
 cd ../backend
 npm install
 
-#### 4. Add Environment Variables
-# Create .env files as shown above
+### 4. Add Environment Variables
+ Create .env files as shown above
 
 ### 5. Start the Project
-# Run backend server
 cd backend
 npm run server
 

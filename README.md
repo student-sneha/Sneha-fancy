@@ -56,7 +56,7 @@ Create a `.env` file in both `/frontend` and `/backend` directories with the fol
 VITE_BACKEND_URL=http://localhost:4000
 
 ### `/backend/.env`
-```env
+`env`
 PORT=4000
 MONGO_URL=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret

@@ -4,7 +4,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
 
-
 const Login = () => {
   const [currentState, setCurrentState] = useState("Login");
   const { token, setToken, navigate, backendUrl } = useContext(ShopContext);
@@ -14,7 +13,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
 
   const location = useLocation();
-const from = location.state?.from || "/";
+  const from = location.state?.from || "/";
 
   const validateEmail = (email) => {
     const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
@@ -49,11 +48,10 @@ const from = location.state?.from || "/";
           setName("");
           setEmail("");
           setPassword("");
-       navigate(from);
+          navigate(from);
         } else {
           toast.error(response.data.message || "Signup failed");
         }
-
       } else {
         const response = await axios.post(`${backendUrl}/api/user/login`, {
           email,
@@ -66,7 +64,7 @@ const from = location.state?.from || "/";
           toast.success("Login successful!");
           setEmail("");
           setPassword("");
-       navigate(from);
+          navigate(from);
         } else {
           toast.error("Invalid email or password");
         }
@@ -77,11 +75,11 @@ const from = location.state?.from || "/";
     }
   };
 
-useEffect(() => {
-  if (token && location.pathname === "/login" && !location.state?.from) {
-    navigate("/");
-  }
-}, [token, location]);
+  useEffect(() => {
+    if (token && location.pathname === "/login" && !location.state?.from) {
+      navigate("/");
+    }
+  }, [token, location]);
 
   return (
     <form
@@ -129,7 +127,9 @@ useEffect(() => {
       />
 
       <div className="w-full flex justify-between text-sm mt-[-8px]">
-        <p className="cursor-pointer">Forget your password?</p>
+        {currentState === "Login" && (
+          <p className="cursor-pointer">Forget your password?</p>
+        )}
         <p
           className="cursor-pointer"
           onClick={() =>

@@ -28,19 +28,19 @@ It features a seamless shopping experience for users and a powerful admin panel 
 
 ## 🚀 Tech Stack
 
-### 🖥️ Frontend (`/frontend`)
+### 🖥️ Frontend (/frontend)
 - React.js + React Router
 - Axios
 - Bootstrap + Custom CSS
 
-### 🛠️ Backend (`/backend`)
+### 🛠️ Backend (/backend)
 - Node.js + Express.js
 - MongoDB + Mongoose
 - JWT Authentication
 - Multer + Cloudinary (Image Uploads)
 - Stripe Payment Gateway
 
-### ⚙️ Admin Panel (`/admin`)
+### ⚙️ Admin Panel (/admin)
 - React.js-based dashboard
 - Product & Order management UI
 - Protected admin routes
@@ -49,14 +49,16 @@ It features a seamless shopping experience for users and a powerful admin panel 
 
 ## 🔐 Environment Variables
 
-Create a `.env` file in both `/frontend` and `/backend` directories with the following content:
+Create a .env file in both /frontend and /backend directories with the following content:
 
-### `/frontend/.env`
-```env```
+### /frontend/.env
+
+env
 VITE_BACKEND_URL=http://localhost:4000
 
 ### `/backend/.env`
-```env```
+
+env
 PORT=4000
 MONGO_URL=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret

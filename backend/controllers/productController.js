@@ -1,7 +1,7 @@
 import { v2 as cloudinary } from "cloudinary";
 import productModel from "../models/productModel.js";
 
-// function for add product
+// function for add product without sizes
 const addProduct = async (req, res) => {
   try {
     const {
@@ -10,57 +10,23 @@ const addProduct = async (req, res) => {
       description,
       category,
       subCategory,
-      sizes,
       bestseller,
       quantity,
     } = req.body;
 
-    // ✅ Basic validation
+    // Basic validation without sizes
     if (
       !name ||
       !price ||
       !description ||
       !category ||
       !subCategory ||
-      !sizes ||
       !quantity
     ) {
       return res.status(400).json({
         success: false,
-        message: "All fields including sizes and quantity are required.",
+        message: "All fields except sizes are required.",
       });
-    }
-
-    // ✅ Parse sizes (even for non-clothing)
-    let parsedSizes;
-
-    const sizeRequiredSubCategories = ["Topwear", "Bottomwear", "Winterwear"];
-
-    try {
-      parsedSizes = JSON.parse(sizes);
-
-      if (!Array.isArray(parsedSizes) || parsedSizes.length === 0) {
-        // If subcategory is clothing, size is required
-        if (sizeRequiredSubCategories.includes(subCategory)) {
-          throw new Error(
-            "Sizes must be a non-empty array for clothing subcategories."
-          );
-        } else {
-          // If not clothing, assign default
-          parsedSizes = ["Free Size"];
-        }
-      }
-    } catch (err) {
-      // If JSON parse fails
-      if (sizeRequiredSubCategories.includes(subCategory)) {
-        return res.status(400).json({
-          success: false,
-          message:
-            "Invalid sizes format. Must be a non-empty JSON array for clothing items.",
-        });
-      } else {
-        parsedSizes = ["Free Size"];
-      }
     }
 
     const image1 = req.files.image1?.[0];
@@ -88,8 +54,8 @@ const addProduct = async (req, res) => {
       bestseller: bestseller === "true",
       image: imageUrl,
       quantity: Number(quantity),
-      sizes: parsedSizes,
       date: Date.now(),
+      // sizes removed here
     };
 
     try {
@@ -105,6 +71,7 @@ const addProduct = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+
 // function for list product
 const listProduct = async (req, res) => {
   try {

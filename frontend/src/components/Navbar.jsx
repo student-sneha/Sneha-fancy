@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { assets } from "../assets/assets";
 import { Link, NavLink } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
@@ -6,6 +6,8 @@ import { ShopContext } from "../context/ShopContext";
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null); // ref for dropdown element
+
   const {
     setShowSearch,
     getCartCount,
@@ -21,6 +23,25 @@ const Navbar = () => {
     setCartItems({});
     navigate("/login");
   };
+
+  // Close dropdown if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        showDropdown && 
+        dropdownRef.current && 
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showDropdown]);
 
   return (
     <div className="flex items-center justify-between font-medium relative z-50">
@@ -54,10 +75,10 @@ const Navbar = () => {
 
       <div className="flex items-center gap-6">
         <img
-          onClick={() => {setShowSearch(true),   navigate("/collection")}}
+          onClick={() => {setShowSearch(true); navigate("/collection")}}
           src={assets.search_icon}
-
           className="w-5 cursor-pointer"
+          alt="Search Icon"
         />
         <div className="relative group">
           <img
@@ -69,12 +90,13 @@ const Navbar = () => {
               }
             }}
             src={assets.profile_icon}
-            alt=""
+            alt="Profile Icon"
             className="w-5 cursor-pointer"
           />
           {/* Dropdown Menu */}
           {token && (
             <div
+              ref={dropdownRef}
               className={`${
                 showDropdown ? "block" : "hidden"
               } group-hover:block absolute right-0 pt-4 z-50`}
@@ -113,7 +135,7 @@ const Navbar = () => {
         </div>
 
         <Link to="/cart" className="relative">
-          <img src={assets.cart_icon} className="w-5 min-w-5" alt="" />
+          <img src={assets.cart_icon} className="w-5 min-w-5" alt="Cart Icon" />
           <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]">
             {getCartCount()}
           </p>
@@ -122,6 +144,7 @@ const Navbar = () => {
           onClick={() => setVisible(true)}
           src={assets.menu_icon}
           className="w-5 cursor-pointer sm:hidden"
+          alt="Menu Icon"
         />
       </div>
 
@@ -136,7 +159,7 @@ const Navbar = () => {
             onClick={() => setVisible(false)}
             className="flex items-center gap-4 p-3 cursor-pointer"
           >
-            <img src={assets.dropdown_icon} className="h-4 rotate-180" />
+            <img src={assets.dropdown_icon} className="h-4 rotate-180" alt="Back Icon" />
             <p>Back</p>
           </div>
           <NavLink

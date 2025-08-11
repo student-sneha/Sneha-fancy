@@ -12,7 +12,11 @@ const userSchema = new mongoose.Schema(
       validate: [validator.isEmail, "Please provide a valid email"],
     },
     password: { type: String, required: true },
-    cartData: { type: Object, default: {} },
+    cartData: {
+      type: Map,
+      of: Number,
+      default: new Map(),
+    },
   },
   { minimize: false }
 );

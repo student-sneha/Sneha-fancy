@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { assets } from "../assets/assets";
 import { backendUrl } from "../App";
@@ -16,9 +16,6 @@ const Add = ({ token }) => {
   const [bestseller, setBestseller] = useState(false);
   const [subCategory, setSubCategory] = useState("Earrings");
   const [quantity, setQuantity] = useState("");
-  const [sizes, setSizes] = useState(["Free Size"]);
-
-  const sizeRequiredSubCategories = ["Sports Bra", "Innerwear"];
 
   const subCategories = [
     "Earrings",
@@ -35,14 +32,6 @@ const Add = ({ token }) => {
     "Jewelry",
   ];
 
-  useEffect(() => {
-    if (sizeRequiredSubCategories.includes(subCategory)) {
-      setSizes([]); // allow size selection
-    } else {
-      setSizes(["Free Size"]); // fixed for non-clothing
-    }
-  }, [subCategory]);
-
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -54,7 +43,6 @@ const Add = ({ token }) => {
       formData.append("category", "Women");
       formData.append("subCategory", subCategory);
       formData.append("bestseller", bestseller);
-      formData.append("sizes", JSON.stringify(sizes));
       formData.append("quantity", quantity);
 
       if (image1) formData.append("image1", image1);
@@ -74,7 +62,6 @@ const Add = ({ token }) => {
         setQuantity("");
         setBestseller(false);
         setSubCategory("Earrings");
-        setSizes(["Free Size"]);
         setImage1(false);
         setImage2(false);
         setImage3(false);
@@ -175,34 +162,6 @@ const Add = ({ token }) => {
             required
           />
         </div>
-      </div>
-
-      {/* Sizes */}
-      <div>
-        <p className="mb-2">Product Size</p>
-        {sizeRequiredSubCategories.includes(subCategory) ? (
-          <div className="flex gap-2">
-            {["S", "M", "L", "XL", "XXL"].map((size) => (
-              <p
-                key={size}
-                onClick={() =>
-                  setSizes((prev) =>
-                    prev.includes(size)
-                      ? prev.filter((s) => s !== size)
-                      : [...prev, size]
-                  )
-                }
-                className={`cursor-pointer px-3 py-1 border rounded ${
-                  sizes.includes(size) ? "bg-pink-200" : "bg-slate-200"
-                }`}
-              >
-                {size}
-              </p>
-            ))}
-          </div>
-        ) : (
-          <p className="px-3 py-1 bg-slate-200 inline-block">Free Size</p>
-        )}
       </div>
 
       {/* Bestseller Checkbox */}

@@ -4,38 +4,44 @@ import Title from "../components/Title";
 import { assets } from "../assets/assets";
 import { Link } from "react-router-dom";
 import CardTotal from "../components/CardTotal";
+import { toast } from "react-toastify";
 
 const Cart = () => {
-  const { products, currency, cartItems, updateQuanity, navigate } =
+  const { products, currency, cartItems, updateQuantity } =
     useContext(ShopContext);
 
   const [cartData, setCartData] = useState([]);
 
-  // Prepare cart data from cartItems
   useEffect(() => {
     if (products.length > 0) {
       const tempData = [];
-
       for (const productId in cartItems) {
-        for (const size in cartItems[productId]) {
-          if (cartItems[productId][size] > 0) {
-            tempData.push({
-              _id: productId,
-              size: size,
-              quantity: cartItems[productId][size],
-            });
-          }
+        if (cartItems[productId] > 0) {
+          tempData.push({
+            _id: productId,
+            quantity: cartItems[productId],
+          });
         }
       }
-
       setCartData(tempData);
     }
   }, [cartItems, products]);
+
+  const handleCheckoutClick = (e) => {
+    e.preventDefault();
+    toast.info("🚚 Shipping starts from 27 August (Ganesh Chaturthi)!");
+  };
 
   return (
     <div className="border-t pt-14 px-4 sm:px-8">
       <div className="text-2xl mb-3">
         <Title text1="YOUR" text2="CART" />
+      </div>
+
+      {/* Permanent info banner */}
+      <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-6 rounded">
+        🚚 Shipping starts from <strong>27 August</strong> (Ganesh Chaturthi).
+        You can browse and add items to your cart now!
       </div>
 
       {/* Cart items */}
@@ -45,7 +51,6 @@ const Cart = () => {
             const productData = products.find(
               (product) => product._id === item._id
             );
-
             if (!productData) return null;
 
             return (
@@ -53,7 +58,6 @@ const Cart = () => {
                 key={idx}
                 className="py-4 border-t border-b text-gray-700 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
               >
-                {/* Product info */}
                 <div className="flex gap-4 sm:gap-6">
                   <img
                     src={productData.image[0]}
@@ -64,19 +68,13 @@ const Cart = () => {
                     <p className="text-sm sm:text-lg font-medium">
                       {productData.name}
                     </p>
-                    <div className="flex items-center gap-3 mt-2">
-                      <p className="text-sm">
-                        {currency}
-                        {productData.price}
-                      </p>
-                      <p className="px-2 py-1 border bg-slate-100 rounded text-sm">
-                        {item.size}
-                      </p>
-                    </div>
+                    <p className="mt-2 text-sm">
+                      {currency}
+                      {productData.price}
+                    </p>
                   </div>
                 </div>
 
-                {/* Quantity and delete */}
                 <div className="flex items-center gap-4 self-start sm:self-center">
                   <input
                     type="number"
@@ -86,14 +84,14 @@ const Cart = () => {
                     onChange={(e) => {
                       const value = e.target.value;
                       if (value === "" || value === "0") return;
-                      updateQuanity(item._id, item.size, Number(value));
+                      updateQuantity(item._id, Number(value));
                     }}
                   />
                   <img
                     src={assets.bin_icon}
                     alt="delete"
                     className="w-5 cursor-pointer"
-                    onClick={() => updateQuanity(item._id, item.size, 0)}
+                    onClick={() => updateQuantity(item._id, 0)}
                   />
                 </div>
               </div>
@@ -101,33 +99,33 @@ const Cart = () => {
           })}
         </div>
       ) : (
-       <div className="text-center text-gray-500 py-10 text-lg">
-  <p className="mb-4">You have no orders yet.</p>
-  <Link to="/collection" className="shop-now-btn">
-    Shop Now
-  </Link>
-</div>
+        <div className="text-center text-gray-500 py-10 text-lg">
+          <p className="mb-4">You have no orders yet.</p>
+          <Link to="/collection" className="shop-now-btn">
+            Shop Now
+          </Link>
+        </div>
       )}
 
       {/* Total and Checkout */}
-      <div className="flex justify-end my-20">
-        <div className="w-full sm:w-[450px]">
-          <CardTotal />
-          <div className="w-full text-end">
-            <button
-              disabled={cartData.length === 0}
-              onClick={() => navigate("./PlaceOrder")}
-              className={`text-sm my-8 px-6 py-3 rounded transition duration-300 ${
-                cartData.length === 0
-                  ? "bg-gray-400 text-white cursor-not-allowed"
-                  : "bg-black text-white hover:bg-gray-800"
-              }`}
-            >
-              Proceed to checkout
-            </button>
+      {cartData.length > 0 && (
+        <div className="flex justify-end my-20">
+          <div className="w-full sm:w-[450px]">
+            <CardTotal />
+            <div className="w-full text-end">
+              <button
+                onClick={handleCheckoutClick}
+                className="text-sm my-8 px-6 py-3 rounded transition duration-300 bg-gray-400 text-white cursor-not-allowed"
+              >
+                Proceed to checkout
+              </button>
+              <p className="text-xs text-gray-500 mt-1">
+                Checkout will be available from 27 August
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
